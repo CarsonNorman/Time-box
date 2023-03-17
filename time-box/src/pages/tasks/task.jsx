@@ -5,11 +5,8 @@ import TaskList from "./task-list";
 function Tasks() {
   const 
   today = new Date(),
-    todayDate = today.getDate(),
-    currentYear = today.getFullYear(),
-    currentMonth = today.getMonth(),  
     [tasks, setTasks] = useState([]),
-    [task, setTask] = useState({label: '', dateStart: today, dateEnd: today}),
+    [task, setTask] = useState({label: '', timeStart:'00:00', timeEnd: '00:00'}),
     [flag, setFlag] = useState(false),
     handleAdd = (e) => {
       e.preventDefault();
@@ -17,9 +14,10 @@ function Tasks() {
         ...tasks,
         task,
       ]);
-      setTask({label: '', dateStart: today, dateEnd: today});
+      setTask({label: '', timeStart: '00:00', timeEnd: '00:00'});
     },
     handleChange = (e) => {
+      console.log(e.target.name, e.target.value)
       setTask({...task, [e.target.name]: e.target.value});
     },
     handleDelete = (idx) => {
