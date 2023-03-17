@@ -6,7 +6,8 @@ function Tasks() {
   const 
   today = new Date(),
     [tasks, setTasks] = useState([]),
-    [task, setTask] = useState({label: '', timeStart:'00:00', timeEnd: '00:00'}),
+    [task, setTask] = useState({label: ''}),
+    [startTime, setStartTime] = useState('00:00'),
     [flag, setFlag] = useState(false),
     handleAdd = (e) => {
       e.preventDefault();
@@ -14,10 +15,12 @@ function Tasks() {
         ...tasks,
         task,
       ]);
-      setTask({label: '', timeStart: '00:00', timeEnd: '00:00'});
+      setTask({label: ''});
+    },
+    handleStartTime = (e) =>{
+      setStartTime(e.target.value)
     },
     handleChange = (e) => {
-      console.log(e.target.name, e.target.value)
       setTask({...task, [e.target.name]: e.target.value});
     },
     handleDelete = (idx) => {
@@ -32,10 +35,10 @@ function Tasks() {
       <TaskForm
         handleAdd={handleAdd}
         handleChange={handleChange}
-        handleD
+        handleStartTime={handleStartTime}
         task={task}
       />
-      <TaskList tasks={tasks} handleDelete={handleDelete} />
+      <TaskList tasks={tasks} handleDelete={handleDelete} startTime={startTime} />
     </>
   );
 }
